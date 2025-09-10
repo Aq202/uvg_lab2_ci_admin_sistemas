@@ -1,0 +1,28 @@
+name: Python Unit Tests
+
+# Pull Request o push a main
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clonar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Configurar Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13' 
+
+      # Ejecutar tests
+      - name: Run unit tests
+        run: |
+          python -m unittest discover -s tests -p "test_*.py"
